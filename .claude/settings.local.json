@@ -13,7 +13,10 @@
       "Bash(gh repo:*)",
       "Bash(vercel whoami:*)",
       "Bash(vercel --yes)",
-      "Bash(vercel --prod --yes)"
+      "Bash(vercel --prod --yes)",
+      "mcp__604a0a7d-8bad-44ed-a8b7-a92ef1cb22e6__search_files",
+      "mcp__604a0a7d-8bad-44ed-a8b7-a92ef1cb22e6__list_recent_files",
+      "mcp__604a0a7d-8bad-44ed-a8b7-a92ef1cb22e6__read_file_content"
     ]
   }
 }
