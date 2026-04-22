@@ -1,0 +1,55 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Comments from '../components/Comments.astro';
+import { type CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+  prev?: CollectionEntry<'blog'>;
+  next?: CollectionEntry<'blog'>;
+}
+
+const { post, prev, next } = Astro.props;
+const { title, date, tag, description } = post.data;
+
+const formattedDate = new Date(date).toLocaleDateString('zh-CN', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="container">
+    <div class="post-header">
+      <a href="/blog" class="back-link">← 所有文章</a>
+      <div class="post-header-tag">{tag}</div>
+      <h1 class="post-header-title">{title}</h1>
+      <div class="post-header-meta">{formattedDate}</div>
+      {description && <p class="post-header-desc">{description}</p>}
+    </div>
+
+    <article class="prose">
+      <slot />
+    </article>
+
+    <Comments />
+
+    {(prev || next) && (
+      <nav class="post-nav">
+        {prev ? (
+          <div class="post-nav-item">
+            <span class="post-nav-label">上一篇</span>
+            <a href={`/blog/${prev.slug}`} class="post-nav-title">{prev.data.title}</a>
+          </div>
+        ) : <div />}
+        {next ? (
+          <div class="post-nav-item next">
+            <span class="post-nav-label">下一篇</span>
+            <a href={`/blog/${next.slug}`} class="post-nav-title">{next.data.title}</a>
+          </div>
+        ) : <div />}
+      </nav>
+    )}
+  </div>
+</BaseLayout>

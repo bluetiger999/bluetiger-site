@@ -1,0 +1,82 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const allTags = [...new Set(posts.map((p) => p.data.tag))];
+
+// Tag filter from query param (client-side JS handles the active state)
+---
+
+<BaseLayout title="文章" description="所有文章">
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">文章</h1>
+      <p class="page-desc">记录思考与洞察</p>
+    </div>
+
+    <!-- Tag filter -->
+    <div class="filter-bar">
+      <button class="tag active" data-tag="">全部</button>
+      {allTags.map((tag) => (
+        <button class="tag" data-tag={tag}>{tag}</button>
+      ))}
+    </div>
+
+    <!-- Post list -->
+    <ul class="post-list" id="post-list">
+      {posts.map((post) => (
+        <li class="post-item" data-tag={post.data.tag}>
+          <a href={`/blog/${post.slug}`}>
+            <span class="post-date">
+              {new Date(post.data.date).toLocaleDateString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+              })}
+            </span>
+            <span class="post-title">{post.data.title}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-bar .tag');
+  const items = document.querySelectorAll<HTMLLIElement>('#post-list .post-item');
+
+  // Check URL param on load
+  const params = new URLSearchParams(window.location.search);
+  const initialTag = params.get('tag') || '';
+
+  function applyFilter(tag: string) {
+    buttons.forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.tag === tag);
+    });
+    items.forEach((item) => {
+      const matches = !tag || item.dataset.tag === tag;
+      (item as HTMLElement).style.display = matches ? '' : 'none';
+    });
+  }
+
+  applyFilter(initialTag);
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const tag = btn.dataset.tag || '';
+      applyFilter(tag);
+      const url = new URL(window.location.href);
+      if (tag) {
+        url.searchParams.set('tag', tag);
+      } else {
+        url.searchParams.delete('tag');
+      }
+      window.history.replaceState({}, '', url.toString());
+    });
+  });
+</script>

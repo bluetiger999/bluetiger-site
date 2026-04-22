@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const recentPosts = posts.slice(0, 5);
+
+const allTags = [...new Set(posts.map((p) => p.data.tag))];
+---
+
+<BaseLayout>
+  <div class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <h1 class="hero-title">求真、尽善、至美</h1>
+      <p class="hero-subtitle">
+        在 AI 巨变的时代里，探索和记录个人的成长、投资与生活。
+      </p>
+    </section>
+
+    <!-- Recent posts -->
+    <section class="section">
+      <div class="section-header">
+        <span class="section-title">近期文章</span>
+        <a href="/blog" class="section-link">全部 →</a>
+      </div>
+      <ul class="post-list">
+        {recentPosts.map((post) => (
+          <li class="post-item">
+            <a href={`/blog/${post.slug}`}>
+              <span class="post-date">
+                {new Date(post.data.date).toLocaleDateString('zh-CN', {
+                  year: 'numeric',
+                  month: '2-digit',
+                  day: '2-digit',
+                })}
+              </span>
+              <span class="post-title">{post.data.title}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- Tags -->
+    <section class="section">
+      <div class="section-header">
+        <span class="section-title">主题</span>
+      </div>
+      <div class="tags-section">
+        {allTags.map((tag) => (
+          <a href={`/blog?tag=${encodeURIComponent(tag)}`} class="tag">{tag}</a>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

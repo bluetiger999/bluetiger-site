@@ -1,0 +1,59 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'bluetiger',
+  description = '在 AI 巨变的时代里，探索和记录个人的成长、投资与生活',
+} = Astro.props;
+
+const currentPath = Astro.url.pathname;
+
+function isActive(path: string) {
+  if (path === '/') return currentPath === '/';
+  return currentPath.startsWith(path);
+}
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title === 'bluetiger' ? 'bluetiger' : `${title} — bluetiger`}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav>
+      <div class="container">
+        <a href="/" class="nav-logo">bluetiger</a>
+        <ul class="nav-links">
+          <li><a href="/blog" class={isActive('/blog') ? 'active' : ''}>文章</a></li>
+          <li><a href="/about" class={isActive('/about') ? 'active' : ''}>关于</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      <div class="container">
+        <p class="footer-text">© {new Date().getFullYear()} bluetiger</p>
+        <p class="footer-text">求真 · 尽善 · 至美</p>
+      </div>
+    </footer>
+  </body>
+</html>

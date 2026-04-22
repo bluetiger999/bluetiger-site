@@ -1,0 +1,113 @@
+---
+// Giscus 评论组件
+// 使用前需完成配置：https://giscus.app/zh-CN
+// 1. 确保 GitHub 仓库是公开的
+// 2. 在仓库 Settings → Features 中开启 Discussions
+// 3. 安装 giscus GitHub App：https://github.com/apps/giscus
+// 4. 访问 https://giscus.app/zh-CN 填入仓库信息，获取下方的 data-repo、data-repo-id、data-category-id
+// 5. 将占位值替换为你自己的配置
+
+interface Props {
+  // 每篇文章对应唯一的 term，用文章路径即可
+  term?: string;
+}
+
+const { term } = Astro.props;
+---
+
+<section class="comments-section">
+  <div class="comments-divider">
+    <span class="comments-label">评论</span>
+  </div>
+
+  <div class="giscus-wrap">
+    <!-- 配置完成后取消注释，并填入正确的 data-repo 等参数 -->
+    <!--
+    <script
+      src="https://giscus.app/client.js"
+      data-repo="你的GitHub用户名/你的仓库名"
+      data-repo-id="YOUR_REPO_ID"
+      data-category="Announcements"
+      data-category-id="YOUR_CATEGORY_ID"
+      data-mapping="pathname"
+      data-strict="0"
+      data-reactions-enabled="1"
+      data-emit-metadata="0"
+      data-input-position="bottom"
+      data-theme="light"
+      data-lang="zh-CN"
+      data-loading="lazy"
+      crossorigin="anonymous"
+      async
+    ></script>
+    -->
+
+    <div class="comments-placeholder">
+      <p>评论功能即将上线。</p>
+      <p class="comments-placeholder-sub">
+        本站使用 <a href="https://giscus.app/zh-CN" target="_blank" rel="noopener">Giscus</a>
+        （基于 GitHub Discussions），配置完成后此处将显示评论区。
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .comments-section {
+    margin-top: 3rem;
+    padding-top: 0;
+  }
+
+  .comments-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .comments-divider::before,
+  .comments-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .comments-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .giscus-wrap {
+    min-height: 80px;
+  }
+
+  .comments-placeholder {
+    text-align: center;
+    padding: 2rem 0;
+  }
+
+  .comments-placeholder p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .comments-placeholder-sub {
+    font-size: 0.8rem !important;
+  }
+
+  .comments-placeholder a {
+    color: var(--text-secondary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .comments-placeholder a:hover {
+    color: var(--text);
+  }
+</style>
