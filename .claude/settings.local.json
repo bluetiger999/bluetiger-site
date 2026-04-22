@@ -4,7 +4,12 @@
       "Bash(npm install:*)",
       "Bash(npm run:*)",
       "Bash(curl -s http://localhost:4321/)",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "Bash(gh --version)",
+      "Bash(vercel --version)",
+      "Bash(brew --version)",
+      "Bash(brew install:*)",
+      "Bash(gh auth:*)"
     ]
   }
 }
