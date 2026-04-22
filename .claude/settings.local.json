@@ -9,7 +9,11 @@
       "Bash(vercel --version)",
       "Bash(brew --version)",
       "Bash(brew install:*)",
-      "Bash(gh auth:*)"
+      "Bash(gh auth:*)",
+      "Bash(gh repo:*)",
+      "Bash(vercel whoami:*)",
+      "Bash(vercel --yes)",
+      "Bash(vercel --prod --yes)"
     ]
   }
 }
