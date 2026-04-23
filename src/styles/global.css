@@ -418,6 +418,72 @@ footer .container {
   margin-bottom: 2rem;
 }
 
+.categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2rem 0 2.5rem;
+}
+
+.category {
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.category h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+}
+
+.category-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem !important;
+  letter-spacing: 0.05em;
+}
+
+.category p:last-child {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0 !important;
+  line-height: 1.5;
+}
+
+.motto {
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.motto-main {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem !important;
+}
+
+.motto-sub {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem !important;
+}
+
+.motto-end {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 0 !important;
+}
+
+@media (max-width: 600px) {
+  .categories {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
 /* Back link */
 .back-link {
   display: inline-flex;
