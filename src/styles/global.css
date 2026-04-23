@@ -460,7 +460,7 @@ footer .container {
 }
 
 .about-ending {
-  color: var(--text-muted) !important;
+  color: var(--text-secondary) !important;
   font-style: italic;
 }
 
@@ -502,9 +502,9 @@ footer .container {
 }
 
 .category-sub {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
   margin: 0 !important;
 }
 
